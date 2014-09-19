@@ -1,0 +1,61 @@
+import java.util.ArrayList;
+import java.util.HashMap;
+
+public class ResistorCalculations {
+
+	private String resistorValue;
+	private Resistor myResistor;
+	
+	public static void main(String[] args) {
+		if (args.length == 1) {
+			ResistorCalculations findBands = new ResistorCalculations(args[0]);
+		} else {
+			ResistorCalculations calculateResistance = new ResistorCalculations(args);
+			System.out.println(calculateResistance.findResistance());
+		}
+	}
+
+	public ResistorCalculations(String resistance) {
+		resistorValue = resistance;
+	}
+	
+	public String findBands() {
+		ArrayList<String> bandValues = new ArrayList<String>();
+		String multiplier = "1";
+		for (int i = 0; i < resistorValue.length(); i++) {
+			char numStr = resistorValue.charAt(i);
+		}
+		
+		return resistorValue;
+	}
+	
+	public ResistorCalculations(String[] bands) {
+		for (String band: bands) {
+			band = band.toLowerCase();
+		}
+		myResistor = (new Resistor(bands));
+	}
+	
+	public String findResistance() {
+		String tolerance = myResistor.getTolerance();
+		Integer resistance = findResistanceHelper();
+		String rtnString = resistance.toString() + " Ohms with a tolerance of " + tolerance + "%";
+		return rtnString;
+	}
+	
+	private int findResistanceHelper () {
+		String base = myResistor.getNthColorValue(0) + myResistor.getNthColorValue(1);
+		Integer multiplier = myResistor.getMultiplier();
+		int resistance = Integer.parseInt(base) * multiplier;
+		return resistance;
+	}
+		
+	private String getResistorValue() {
+		return resistorValue;
+	}
+
+	private Resistor getMyResistor() {
+		return myResistor;
+	}
+}
+
