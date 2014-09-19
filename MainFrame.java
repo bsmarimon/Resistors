@@ -9,7 +9,7 @@ public class MainFrame extends JFrame implements ActionListener{
 	 * 
 	 */
 
-	private ResistorCalculations myResistorCalculator;
+	private Resistor myResistor;
 	private JButton findKey; 
 	private JLabel output; 
 	private JTextField field;
@@ -40,14 +40,16 @@ public class MainFrame extends JFrame implements ActionListener{
 				return;
 			}
 			String outputStr;
-//			try {
-				String[] inputArr = input.split(" ");
-				myResistorCalculator = new ResistorCalculations(inputArr);
-				outputStr = myResistorCalculator.findResistance();
+			String[] inputArr = input.split(" ");
+			if (inputArr.length == 1) {
+				myResistor = new Resistor(inputArr[0]);
+				outputStr = myResistor.findBands();
 				output.setText(outputStr);
-//			} catch (Exception e) {
-//				output.setText("This doesn't seem to be a practical resistor, try entering the color bands in reverse or try another resistor");
-//			}
+			} else {
+				myResistor = new Resistor(inputArr);
+				outputStr = myResistor.findResistance();
+				output.setText(outputStr);
+			}
 		}
 	}
 }
